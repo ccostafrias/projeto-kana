@@ -1,0 +1,139 @@
+:root{
+    --blue: #69a0f1;
+    --light: #fbe8da;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font: normal 12pt Arial;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--blue);
+}
+header {
+    color: white;
+    text-align: center;
+    margin: 30px 0 40px;
+}
+header h1 {
+    font-size: 2em;
+}
+header h2 {
+    font-size: 1.2em;
+}
+section {
+    padding: 20px;
+    margin: auto;
+    background-color: white;
+    max-width: 520px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+#quiz{
+    display: none;
+}
+.caption {
+    width: 80%;
+    background-color: var(--blue);
+    margin: 20px auto;
+    padding: 8px 0;
+    border-radius: 4px;
+}
+  
+.caption p {
+    display: block;
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+  
+.display p {
+    text-align: center;
+    font-size: 5em;
+    margin: 60px 0 40px;
+}
+  
+.answer{
+    width: fit-content;
+    margin: 0 auto 20px;
+}
+
+.answer input {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 2em;
+    width: 60px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid gainsboro;
+    outline: none;
+}
+#lists{
+    display: flex;
+    justify-content: space-between;
+}
+.linkList{
+    /*border-radius: 5px;
+    padding: 4px;
+    background-color: var(--blue);
+    color: white;*/
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+.linkList:hover{
+    text-decoration: underline;
+}
+#interface{
+    margin-top: 10px;
+}
+#interface li{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 200px;
+    margin: 2px;
+    padding: 2px;
+    background-color: var(--light);
+    border-radius: 5px;
+}
+#interface ul{
+    margin-bottom: 10px;
+}
+#interface h1{
+    color: white;
+    background-color: var(--blue);
+    text-align: center;
+    margin: 0 0 10px;
+    border-radius: 5px;
+    padding: 4px;
+}
+input[type="button"]{
+    display: block;
+    width: 100px;
+    background-color: var(--blue);
+    padding: 8px 10px;
+    font-size: 1em;
+    margin: 20px auto 10px;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+input[type="button"]:hover{
+    border: 2px solid var(--blue);
+    background-color: white;
+    color: black;
+}
+footer {
+    color: white;
+    font-style: italic;
+    text-align: center;
+    margin: 20px;
+}  
