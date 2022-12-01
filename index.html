@@ -5,25 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="style.css" />
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
         <title>Kana</title>
     </head>
-    <body>
+    <body onload="load()">
         <header>
             <h1>ひらがな &amp; カタカナ</h1>
             <h2>(Hiragana & Katakana)</h2>
         </header>
         <section>
             <div id="quiz">
-                <div class="caption">
+                <div id="caption">
                     <p>Insira em <em>romanji</em> o que está escrito em <em>nihongo</em></p>
                 </div>
                 <div class="display">
                     <p id="display"></p>
                 </div>
                 <div class="answer">
-                    <input autofocus type="text" class="answer" name="answer1" id="answer1" value="" onkeyup="keyup(event.code)"/>
-                    <input type="text" class="answer" name="answer2" id="answer2" value="" onkeyup="keyup(event.code)"/>
-                    <input type="text" class="answer" name="answer3" id="answer3" value="" onkeyup="keyup(event.code)"/>
+                    <input autofocus type="text" class="answer" name="answer1" id="answer1" value="" onkeyup="keyup(event.which)"/>
+                    <input type="text" class="answer" name="answer2" id="answer2" value="" onkeyup="keyup(event.which)"/>
+                    <input type="text" class="answer" name="answer3" id="answer3" value="" onkeyup="keyup(event.which)"/>
                 </div>
             </div>
             <div id="interface">
@@ -32,18 +34,18 @@
                         <h1>Hiragana</h1>
                         <ul type="none">
                             <form>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox1" id="hcheckbox1" onclick="all()"><label for="hcheckbox1"> a - i - u - e - o</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox2" id=""><label for="hcheckbox2"> ka - ki - ku - ke - ko</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox3" id=""><label for="hcheckbox3"> sa - si - su - se - so</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox4" id=""><label for="hcheckbox4"> ta - ti - tu - te - to</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox5" id=""><label for="hcheckbox5"> na - ni - nu - ne - no</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox6" id=""><label for="hcheckbox6"> ha - hi - hu - he - ho</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox7" id=""><label for="hcheckbox7"> ma - mi - mu - me - mo</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox8" id=""><label for="hcheckbox8"> ya - yu - yo</label></li>
-                                <li><input type="checkbox" class="hcheckbox" name="hcheckbox9" id=""><label for="hcheckbox9"> n - wa - wo</label></li>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox1" id="hcheckbox1" onclick="setlist()"> a - i - u - e - o</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox2" id="hcheckbox2" onclick="setlist()"> ka - ki - ku - ke - ko</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox3" id="hcheckbox3" onclick="setlist()"> sa - shi - su - se - so</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox4" id="hcheckbox4" onclick="setlist()"> ta - chi - tsu - te - to</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox5" id="hcheckbox5" onclick="setlist()"> na - ni - nu - ne - no</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox6" id="hcheckbox6" onclick="setlist()"> ha - hi - fu - he - ho</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox7" id="hcheckbox7" onclick="setlist()"> ma - mi - mu - me - mo</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox8" id="hcheckbox8" onclick="setlist()"> ya - yu - yo</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox9" id="hcheckbox9" onclick="setlist()"> n - wa - wo</li></label>
                             </form>
                         </ul>
-                        <p>
+                        <p class="links">
                             <a class="linkList" onclick="allBoxes('h')">Todos</a> - <a class="linkList" onclick="noneBoxes('h')">Nenhum</a>
                         </p>
                     </div>
@@ -51,18 +53,18 @@
                         <h1>Katakana</h1>
                         <ul type="none">
                             <form>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox1" id=""><label for="kcheckbox1"> a - i - u - e - o</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox2" id=""><label for="kcheckbox2"> ka - ki - ku - ke - ko</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox3" id=""><label for="kcheckbox3"> sa - si - su - se - so</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox4" id=""><label for="kcheckbox4"> ta - ti - tu - te - to</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox5" id=""><label for="kcheckbox5"> na - ni - nu - ne - no</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox6" id=""><label for="kcheckbox6"> ha - hi - hu - he - ho</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox7" id=""><label for="kcheckbox7"> ma - mi - mu - me - mo</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox8" id=""><label for="kcheckbox8"> ya - yu - yo</label></li>
-                                <li><input type="checkbox" class="kcheckbox" name="kcheckbox9" id=""><label for="kcheckbox9"> n - wa - wo</label></li>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox1" id="kcheckbox1" onclick="setlist()"> a - i - u - e - o</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox2" id="kcheckbox2" onclick="setlist()"> ka - ki - ku - ke - ko</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox3" id="kcheckbox3" onclick="setlist()"> sa - shi - su - se - so</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox4" id="kcheckbox4" onclick="setlist()"> ta - chi - tsu - te - to</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox5" id="kcheckbox5" onclick="setlist()"> na - ni - nu - ne - no</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox6" id="kcheckbox6" onclick="setlist()"> ha - hi - fu - he - ho</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox7" id="kcheckbox7" onclick="setlist()"> ma - mi - mu - me - mo</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox8" id="kcheckbox8" onclick="setlist()"> ya - yu - yo</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox9" id="kcheckbox9" onclick="setlist()"> n - wa - wo</li></label>
                             </form>
                         </ul>
-                        <p style="text-align: right;">
+                        <p class="links">
                             <a class="linkList" onclick="allBoxes('k')">Todos</a> - <a class="linkList" onclick="noneBoxes('k')">Nenhum</a>
                         </p>
                     </div>
@@ -71,60 +73,8 @@
             </div>
         </section>
         <footer>
-            <h3>&copy; CursoemVídeo</h3>
+            <h3>&copy; CaioCosa</h3>
         </footer>
-        <script>
-            const quiz = document.getElementById("quiz")
-            const interface = document.getElementById("interface")
-            const inputAns = document.getElementsByClassName("answer");
-            const inputAns1 = document.getElementById("answer1");
-            const inputAns2 = document.getElementById("answer2");
-            const inputAns3 = document.getElementById("answer3");
-            const display = document.getElementById("display");
-            let kanaRow1 = [
-                ["あ", "い", "う", "え", "お"],
-                ["か", "き", "く", "け", "こ"],
-                ["さ", "し", "す", "せ", "そ"],
-                ["た", "ち", "つ", "て", "と"],
-                ["な", "に", "ぬ", "ね", "の"]
-            ];
-            function start(){
-                interface.style.display = "none"
-                quiz.style.display = "block"
-                input()
-            }
-            function keyup(e) {
-                if (e === "Enter") {
-                    if (inputAns1.value != "" && inputAns2.value != "" && inputAns3.value != ""){
-                        input();
-                    }
-                }
-            }
-            function allBoxes(list){
-                var mark = document.getElementsByClassName(list + 'checkbox')
-                for (let i = 0; i <= 8; i++) {
-                    mark[i].checked = true
-                }
-            }
-            function noneBoxes(list){
-                var mark = document.getElementsByClassName(list + 'checkbox')
-                for (let i = 0; i <= 8; i++) {
-                    mark[i].checked = false
-                }
-            }
-            function input() {
-                display.innerHTML = kanaRow1[random(kanaRow1.length)][random(kanaRow1.length)];
-                display.innerHTML += kanaRow1[random(kanaRow1.length)][random(kanaRow1.length)];
-                display.innerHTML += kanaRow1[random(kanaRow1.length)][random(kanaRow1.length)];
-                function random(max){
-                    var random = Math.floor(Math.random() * max);
-                    return random
-                }
-                inputAns1.value = ""
-                inputAns1.focus()
-                inputAns2.value = ""
-                inputAns3.value = ""
-            }
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
