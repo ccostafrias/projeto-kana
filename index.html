@@ -22,10 +22,12 @@
                 <div class="display">
                     <p id="display"></p>
                 </div>
-                <div class="answer">
-                    <input autofocus type="text" class="answer" name="answer1" id="answer1" value="" onkeyup="keyup(event.which)"/>
-                    <input type="text" class="answer" name="answer2" id="answer2" value="" onkeyup="keyup(event.which)"/>
-                    <input type="text" class="answer" name="answer3" id="answer3" value="" onkeyup="keyup(event.which)"/>
+                <div id="answer">  
+                </div>
+                <div id="progress">
+                    <div class="progressBack">
+                        <div class="progressInside"></div>
+                    </div>
                 </div>
             </div>
             <div id="interface">
@@ -69,7 +71,11 @@
                         </p>
                     </div>
                 </div>
-                <input type="button" value="Iniciar" onclick="start()">
+                <div id="inputs">
+                    <div class="number"><label for="tries">Tentativas:</label><input class="inputs" type="number" name="tries" id="tries" value="3" placeholder="3" onchange="saveLocalStorage('tries')"></div>
+                    <input class="inputs" type="button" value="Iniciar" onclick="start()">
+                    <div class="number"><label for="elements">Elementos:</label><input class="inputs" type="number" name="elements" id="elements" value="3" placeholder="3" onchange="saveLocalStorage('elements')"></div>
+                </div>
             </div>
         </section>
         <footer>

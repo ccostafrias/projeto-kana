@@ -1,7 +1,13 @@
 :root{
     --blue: #69a0f1;
     --light: #fbe8da;
-    --dark: #bb7e5d
+    --dark: #443627;
+    --green: #44BBA4;
+    --red: #DF2935;
+}
+::placeholder{
+    color: white;
+    opacity: .5;
 }
 * {
     margin: 0;
@@ -55,29 +61,80 @@ section {
 }
   
 .display p {
+    width: fit-content;
     text-align: center;
     font-size: 5em;
-    margin: 60px 0 40px;
+    margin: 60px auto 40px;
 }
   
-.answer{
-    width: fit-content;
-    margin: 0 auto 20px;
+#answer{
+    width: calc(80% - 100px);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.answer input {
-    display: inline-block;
-    margin: 0 10px;
+#answer input{
+    background-color: transparent;
     font-size: 2em;
     width: 60px;
     text-align: center;
     border: none;
-    border-bottom: 2px solid gainsboro;
     outline: none;
+    border-bottom: 2px solid gainsboro;
+}
+#progress{
+    background-color: var(--dark);
+    height: 80px;
+    width: calc(100% + 40px);
+    margin: 40px 60px -20px -20px;
+    border-radius: 0 0 10px 10px;
+}
+.progressBack{
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    width: 80%;
+    height: 25px;
+    background-color: white;
+    border-radius: 5px;
+    margin: auto;
+}
+.progressBack::before{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    content: "Progresso:";
+    margin: auto;
+    font-weight: bold;
+}
+.progressInside{
+    border-radius: 5px 0 0 5px;
+    transition: 0.3s;
+    text-align: center;
+    width: 0;
+    height: 100%;
+    background-color: var(--blue);
+}
+.list{
+    margin: auto;
 }
 #lists{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+@media all and (max-width: 500px) {
+    #lists{
+        margin: auto;
+        display: block;
+        max-width: 90%;
+    }
+    .list{
+        margin-bottom: 30px;
+    }
 }
 .links{
     text-align: center;
@@ -112,15 +169,16 @@ section {
 #interface li{
     transition: 0.2s;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    width: 200px;
-    margin: 2px;
-    padding: 2px;
+    min-width: 200px;
+    margin: 0 0 5px;
+    padding: 2px 0 2px 4px;
     background-color: var(--light);
     border-radius: 5px;
     cursor: pointer;
 }
 #interface li:hover{
     background-color: var(--dark);
+    color: white;
 }
 #interface ul{
     margin-bottom: 10px;
@@ -133,24 +191,62 @@ section {
     border-radius: 5px;
     padding: 4px;
 }
-input[type="button"]{
-    display: block;
-    width: 100px;
-    background-color: var(--blue);
-    padding: 8px 10px;
-    font-size: 1em;
-    margin: 20px auto 10px;
-    font-weight: bold;
-    color: white;
-    border: 2px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.4s;
+#inputs{
+    background-color: var(--dark);
+    width: calc(100% + 40px);
+    margin: 20px 60px -20px -20px;
+    padding: 20px 0;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: center;
 }
-input[type="button"]:hover{
-    border: 2px solid var(--blue);
-    background-color: white;
-    color: black;
+input[type="button"]{
+    background-color: var(--blue);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    width: 120px;
+    margin: 0 10px;
+  }
+  
+  input[type="button"]:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  input[type="button"]:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+input[type="number"]{
+    display: block;
+    text-align: center;
+    margin: auto 10px;
+    height: 20px;
+    width: 80px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid gainsboro;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+}
+.number label{
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 4px;
+    width: 100%;
+    text-align: center;
+    display: block;
+
 }
 footer {
     color: white;

@@ -1,17 +1,21 @@
 const quiz = document.getElementById("quiz")
 const interface = document.getElementById("interface")
+const section = document.getElementsByTagName("section")
 const listH = document.getElementsByClassName('hcheckbox')
 const listK = document.getElementsByClassName('kcheckbox')
-const inputAns = document.getElementsByClassName("answer")
-const inputAns1 = document.getElementById("answer1")
-const inputAns2 = document.getElementById("answer2")
-const inputAns3 = document.getElementById("answer3")
+const inputAns = document.getElementById("answer")
+const inputAnswers = document.getElementsByClassName("answer")
+const progressBar = document.getElementsByClassName("progressInside")
 const display = document.getElementById("display")
 const caption = document.getElementById("caption")
 let displayX = []
 let displayY = []
 let displayZ = []
 let tries = 3
+let elements = 3
+let total = 15
+let hits = 0
+let displayFontSize = ""
 let arrayKana = [
     [["あ", "い", "う", "え", "お"],
     ["か", "き", "く", "け", "こ"],
@@ -38,13 +42,14 @@ let arrayRomanji = [
     ["sa", "shi", "su", "se", "so"],
     ["ta", "chi", "tsu", "te", "to"],
     ["na", "ni", "nu", "ne", "no"],
-    ["ba", "hi", "fu", "he", "ho"],
+    ["ha", "hi", "fu", "he", "ho"],
     ["ma", "mi", "mu", "me", "mo"],
-    ["ya", "ー", "yu", "ー", "so"],
+    ["ya", "ー", "yu", "ー", "yo"],
     ["wa", "ー", "n", "ー", "wo"]
 ]
 let countH = []
 let countK = []
+let answersLength = []
 function load(){
     countH = JSON.parse(window.localStorage.getItem('listH'))
     for (let i = 0; i <= 8; i++) {
@@ -58,6 +63,13 @@ function load(){
             listK[i].checked = true
         }
     }
+    tries = window.localStorage.getItem('tries')
+    document.getElementById("tries").value = tries
+    elements = window.localStorage.getItem('elements')
+    document.getElementById("elements").value = elements
+}
+function saveLocalStorage(key){
+    window.localStorage.setItem(key, document.getElementById(key).value)
 }
 function setlist(){
     countH = []
@@ -80,22 +92,53 @@ function start(){
     if (countH.length !== 0 || countK.length !== 0){
         interface.style.display = "none"
         quiz.style.display = "block"
-        input()
-    }
-}
-function keyup(e) {
-    if (e == 13) {
-        var answer1 = String(inputAns1.value).toLowerCase()
-        var answer2 = String(inputAns2.value).toLowerCase()
-        var answer3 = String(inputAns3.value).toLowerCase()
-        if (answer1 == arrayRomanji[displayY[0]][displayZ[0]] && answer2 == arrayRomanji[displayY[1]][displayZ[1]] && answer3 == arrayRomanji[displayY[2]][displayZ[2]]){
-            caption.children[0].innerHTML = `<strong>Correto!:</strong> ${arrayKana[displayX[0]][displayY[0]][displayZ[0]]}${arrayKana[displayX[1]][displayY[1]][displayZ[1]]}${arrayKana[displayX[2]][displayY[2]][displayZ[2]]} = ${arrayRomanji[displayY[0]][displayZ[0]]}${arrayRomanji[displayY[1]][displayZ[1]]}${arrayRomanji[displayY[2]][displayZ[2]]}`
-            caption.style.backgroundColor = "green"
-        }else{
-            caption.children[0].innerHTML = `<strong>Errado!:</strong> ${arrayKana[displayX[0]][displayY[0]][displayZ[0]]}${arrayKana[displayX[1]][displayY[1]][displayZ[1]]}${arrayKana[displayX[2]][displayY[2]][displayZ[2]]} = ${arrayRomanji[displayY[0]][displayZ[0]]}${arrayRomanji[displayY[1]][displayZ[1]]}${arrayRomanji[displayY[2]][displayZ[2]]}`
-            caption.style.backgroundColor = "red"
+        tries = document.getElementById("tries").value
+        elements = document.getElementById("elements").value
+        displayFontSize = (section[0].offsetWidth * ((getBaseLog(2, elements) + 3)/10)) / elements
+        inputAns.style.width = displayFontSize*elements*(105/100) + "px"
+        for (let i = 0; i < elements; i++){
+            var inputElement = document.createElement('input')
+            inputElement.setAttribute('type', 'text')
+            inputElement.setAttribute('class', 'answer')
+            inputElement.setAttribute('id', 'answer' + i)
+            inputElement.style.width = (displayFontSize * 7/10) + "px"
+            inputElement.addEventListener('keyup', function(e){
+                if (e.which == 13){
+                    answersLength = []
+                    for (let i = 0; i < inputAnswers.length; i++){
+                        if (inputAnswers[i].value == arrayRomanji[displayY[i]][displayZ[i]]){
+                            answersLength.push(i)
+                        }else if (inputAnswers[i].value == ""){
+                            
+                        }
+                    }
+                    if (answersLength.length == elements){
+                        caption.children[0].innerHTML = "<strong>Acertou! </strong>"
+                        caption.style.backgroundColor = "var(--green)"
+                        hits ++
+                        progressBar[0].style.width = document.getElementsByClassName("progressBack")[0].offsetWidth * (hits/total) + "px"
+                    }else{
+                        caption.children[0].innerHTML = "<strong>Errou! </strong>"
+                        caption.style.backgroundColor = "var(--red)"
+                        hits --
+                        progressBar[0].style.width = document.getElementsByClassName("progressBack")[0].offsetWidth * (hits/total) + "px"
+                    }
+                    for (let i = 0; i < elements; i++) {
+                        caption.children[0].innerHTML += arrayKana[displayX[i]][displayY[i]][displayZ[i]]
+                    }
+                    caption.children[0].innerHTML += " = "
+                    for (let i = 0; i < elements; i++) {
+                        caption.children[0].innerHTML += arrayRomanji[displayY[i]][displayZ[i]]
+                    }
+                    input(elements);
+                }
+            })
+            inputAns.appendChild(inputElement)
+            if (i == 0){
+                inputElement.focus()
+            }
         }
-        input();
+        input(elements)
     }
 }
 function allBoxes(list){
@@ -130,11 +173,21 @@ function chance(){
         }
     }
 }
-function input(nRepeat = 3) {
+function getBaseLog(x, y) {
+    return Math.log(y) / Math.log(x);
+}
+function input(nRepeat) {
+    display.style.fontSize = displayFontSize + "px"
     display.innerHTML = ""
     displayX = []
     displayY = []
     displayZ = []
+    for (let i = 0; i < inputAnswers.length; i++) {
+        inputAnswers[i].value = ""
+        if (i == 0){
+            inputAnswers[i].focus()
+        }
+    }
     for (let i = 0; i < nRepeat; i++) {
         displayX[i] = chance()
         if (displayX[i] == 0){
@@ -154,8 +207,4 @@ function input(nRepeat = 3) {
         }
         display.innerHTML += arrayKana[displayX[i]][displayY[i]][displayZ[i]]
     }
-    inputAns1.value = ""
-    inputAns1.focus()
-    inputAns2.value = ""
-    inputAns3.value = ""
 }
