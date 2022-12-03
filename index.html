@@ -4,9 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="https://kit.fontawesome.com/8dd5f1cbc2.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="style.css" />
         <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
         <title>Kana</title>
     </head>
     <body onload="load()">
@@ -18,6 +19,9 @@
             <div id="quiz">
                 <div id="caption">
                     <p>Insira em <em>romanji</em> o que está escrito em <em>nihongo</em></p>
+                </div>
+                <div id="triesTxt">
+                    <p></p>
                 </div>
                 <div class="display">
                     <p id="display"></p>
@@ -44,7 +48,8 @@
                                 <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox6" id="hcheckbox6" onclick="setlist()"> ha - hi - fu - he - ho</li></label>
                                 <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox7" id="hcheckbox7" onclick="setlist()"> ma - mi - mu - me - mo</li></label>
                                 <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox8" id="hcheckbox8" onclick="setlist()"> ya - yu - yo</li></label>
-                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox9" id="hcheckbox9" onclick="setlist()"> n - wa - wo</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox9" id="hcheckbox9" onclick="setlist()"> ra - ri - ru - re - ro</li></label>
+                                <label><li><input type="checkbox" class="hcheckbox" name="hcheckbox10" id="hcheckbox10" onclick="setlist()"> n - wa - wo</li></label>
                             </form>
                         </ul>
                         <p class="links">
@@ -63,7 +68,8 @@
                                 <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox6" id="kcheckbox6" onclick="setlist()"> ha - hi - fu - he - ho</li></label>
                                 <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox7" id="kcheckbox7" onclick="setlist()"> ma - mi - mu - me - mo</li></label>
                                 <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox8" id="kcheckbox8" onclick="setlist()"> ya - yu - yo</li></label>
-                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox9" id="kcheckbox9" onclick="setlist()"> n - wa - wo</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox9" id="kcheckbox9" onclick="setlist()"> ra - ri - ru - re - ro</li></label>
+                                <label><li><input type="checkbox" class="kcheckbox" name="kcheckbox10" id="kcheckbox10" onclick="setlist()"> n - wa - wo</li></label>
                             </form>
                         </ul>
                         <p class="links">
@@ -72,10 +78,17 @@
                     </div>
                 </div>
                 <div id="inputs">
-                    <div class="number"><label for="tries">Tentativas:</label><input class="inputs" type="number" name="tries" id="tries" value="3" placeholder="3" onchange="saveLocalStorage('tries')"></div>
+                    <div class="number"><label for="tries">Tentativas:</label><input class="inputs" type="number" name="tries" id="tries" value="3" placeholder="3" onchange="saveLocalStorage('tries')" min="0"></div>
                     <input class="inputs" type="button" value="Iniciar" onclick="start()">
-                    <div class="number"><label for="elements">Elementos:</label><input class="inputs" type="number" name="elements" id="elements" value="3" placeholder="3" onchange="saveLocalStorage('elements')"></div>
+                    <div class="number"><label for="elements">Kanas:</label><input class="inputs" type="number" name="elements" id="elements" value="3" placeholder="3" onchange="saveLocalStorage('elements')" min="0"></div>
                 </div>
+            </div>
+            <div id="after">
+                <h1></h1>
+                <p></p>
+                <p></p>
+                <input type="button" value="">
+                <input type="button" value="">
             </div>
         </section>
         <footer>

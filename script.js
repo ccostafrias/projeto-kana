@@ -8,6 +8,7 @@ const inputAnswers = document.getElementsByClassName("answer")
 const progressBar = document.getElementsByClassName("progressInside")
 const display = document.getElementById("display")
 const caption = document.getElementById("caption")
+const triesTxt = document.getElementById("triesTxt").children[0]
 let displayX = []
 let displayY = []
 let displayZ = []
@@ -15,6 +16,7 @@ let tries = 3
 let elements = 3
 let total = 15
 let hits = 0
+let misses = 0
 let displayFontSize = ""
 let arrayKana = [
     [["あ", "い", "う", "え", "お"],
@@ -25,6 +27,7 @@ let arrayKana = [
     ["は", "ひ", "ふ", "へ", "ほ"],
     ["ま", "み", "む", "め", "も"],
     ["や", "ー", "ゆ", "ー", "よ"],
+    ["ら", "り", "る", "れ", "ろ"],
     ["わ", "ー", "ん", "ー", "を"]],
     [["ア", "イ", "ウ", "エ", "オ"],
     ["カ", "キ", "ク", "ケ", "コ"],
@@ -34,6 +37,7 @@ let arrayKana = [
     ["ハ", "ヒ", "フ", "ヘ", "ホ"],
     ["マ", "ミ", "ム", "メ", "モ"],
     ["ヤ", "ー", "ユ", "ー", "ヨ"],
+    ["ラ", "リ", "ル", "レ", "ロ"],
     ["ワ", "ー", "ン", "ー", "ヲ"]]
 ]
 let arrayRomanji = [
@@ -45,6 +49,7 @@ let arrayRomanji = [
     ["ha", "hi", "fu", "he", "ho"],
     ["ma", "mi", "mu", "me", "mo"],
     ["ya", "ー", "yu", "ー", "yo"],
+    ["ra", "ri", "ru", "re", "ro"],
     ["wa", "ー", "n", "ー", "wo"]
 ]
 let countH = []
@@ -52,13 +57,13 @@ let countK = []
 let answersLength = []
 function load(){
     countH = JSON.parse(window.localStorage.getItem('listH'))
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < arrayRomanji.length; i++) {
         if (countH.indexOf(i) !== -1){
             listH[i].checked = true
         }
     }
     countK = JSON.parse(window.localStorage.getItem('listK'))
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < arrayRomanji.length; i++) {
         if (countK.indexOf(i) !== -1){
             listK[i].checked = true
         }
@@ -73,14 +78,14 @@ function saveLocalStorage(key){
 }
 function setlist(){
     countH = []
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < arrayRomanji.length; i++) {
         if (listH[i].checked == true){
             countH.push(i)
         }
     }
     window.localStorage.setItem('listH', JSON.stringify(countH))
     countK = []
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < arrayRomanji.length; i++) {
         if (listK[i].checked == true){
             countK.push(i)
         }
@@ -106,31 +111,35 @@ function start(){
                 if (e.which == 13){
                     answersLength = []
                     for (let i = 0; i < inputAnswers.length; i++){
-                        if (inputAnswers[i].value == arrayRomanji[displayY[i]][displayZ[i]]){
+                        if (String(inputAnswers[i].value).toLocaleLowerCase() == arrayRomanji[displayY[i]][displayZ[i]]){
                             answersLength.push(i)
                         }else if (inputAnswers[i].value == ""){
-                            
+                            answersLength.push("")
                         }
                     }
-                    if (answersLength.length == elements){
-                        caption.children[0].innerHTML = "<strong>Acertou! </strong>"
-                        caption.style.backgroundColor = "var(--green)"
-                        hits ++
-                        progressBar[0].style.width = document.getElementsByClassName("progressBack")[0].offsetWidth * (hits/total) + "px"
-                    }else{
-                        caption.children[0].innerHTML = "<strong>Errou! </strong>"
-                        caption.style.backgroundColor = "var(--red)"
-                        hits --
-                        progressBar[0].style.width = document.getElementsByClassName("progressBack")[0].offsetWidth * (hits/total) + "px"
+                    if (answersLength.indexOf("") == -1){
+                        if (answersLength.length == elements){
+                            caption.children[0].innerHTML = "<strong>Acertou! </strong>"
+                            caption.style.backgroundColor = "var(--green)"
+                            hits ++
+                            progressBar[0].style.width = (hits/total)*100 + "%"
+                        }else{
+                            caption.children[0].innerHTML = "<strong>Errou! </strong>"
+                            caption.style.backgroundColor = "var(--red)"
+                            hits --
+                            misses ++
+                            triesTxt.innerHTML += '\uf00d'
+                            progressBar[0].style.width = (hits/total)*100 + "%"
+                        }
+                        for (let i = 0; i < elements; i++) {
+                            caption.children[0].innerHTML += arrayKana[displayX[i]][displayY[i]][displayZ[i]]
+                        }
+                        caption.children[0].innerHTML += " = "
+                        for (let i = 0; i < elements; i++) {
+                            caption.children[0].innerHTML += arrayRomanji[displayY[i]][displayZ[i]]
+                        }
+                        input(elements);
                     }
-                    for (let i = 0; i < elements; i++) {
-                        caption.children[0].innerHTML += arrayKana[displayX[i]][displayY[i]][displayZ[i]]
-                    }
-                    caption.children[0].innerHTML += " = "
-                    for (let i = 0; i < elements; i++) {
-                        caption.children[0].innerHTML += arrayRomanji[displayY[i]][displayZ[i]]
-                    }
-                    input(elements);
                 }
             })
             inputAns.appendChild(inputElement)
@@ -143,14 +152,14 @@ function start(){
 }
 function allBoxes(list){
     var mark = document.getElementsByClassName(list + 'checkbox')
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < arrayRomanji.length; i++) {
         mark[i].checked = true
     }
     setlist()
 }
 function noneBoxes(list){
     var mark = document.getElementsByClassName(list + 'checkbox')
-    for (let i = 0; i <= 8; i++) {
+    for (let i = 0; i < arrayRomanji.length; i++) {
         mark[i].checked = false
     }
     setlist()
