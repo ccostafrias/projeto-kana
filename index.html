@@ -11,17 +11,22 @@
         <title>Kana</title>
     </head>
     <body onload="load()">
+        <div id="error-popup">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, sapiente.</p>
+            <span onclick="this.parentElement.classList.toggle('active')">&times;</span> 
+        </div>
         <header>
             <h1>ひらがな &amp; カタカナ</h1>
             <h2>(Hiragana & Katakana)</h2>
         </header>
         <section>
             <div id="quiz">
+                <input type="button" value="Voltar" id="bttn-float" onclick="back()">
                 <div id="caption">
                     <p>Insira em <em>romanji</em> o que está escrito em <em>nihongo</em></p>
                 </div>
                 <div id="triesTxt">
-                    <p></p>
+                    <p><span class="tries-left"></span><span class="tries-right"></span></p>
                 </div>
                 <div class="display">
                     <p id="display"></p>
@@ -79,16 +84,20 @@
                 </div>
                 <div id="inputs">
                     <div class="number"><label for="tries">Tentativas:</label><input class="inputs" type="number" name="tries" id="tries" value="3" placeholder="3" onchange="saveLocalStorage('tries')" min="0"></div>
-                    <input class="inputs" type="button" value="Iniciar" onclick="start()">
-                    <div class="number"><label for="elements">Kanas:</label><input class="inputs" type="number" name="elements" id="elements" value="3" placeholder="3" onchange="saveLocalStorage('elements')" min="0"></div>
+                    <input class="bttn-normal" type="button" value="Iniciar" onclick="start()">
+                    <div class="number"><label for="elements">Kanas:</label><input class="inputs" type="number" name="elements" id="elements" value="3" placeholder="3" onchange="saveLocalStorage('elements')" min="0" max="50"></div>
                 </div>
             </div>
-            <div id="after">
-                <h1></h1>
-                <p></p>
-                <p></p>
-                <input type="button" value="">
-                <input type="button" value="">
+            <div id="lw-screen">
+                <h1>Você perdeu!</h1>
+                <div id="lw-txt">
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="lw-bttns">
+                    <input type="button" class="bttn-normal" value="Voltar" onclick="back()">
+                    <input type="button" class="bttn-normal" value="Recomeçar" onclick="start()">
+                </div>
             </div>
         </section>
         <footer>

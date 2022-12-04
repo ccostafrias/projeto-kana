@@ -40,16 +40,74 @@ section {
     max-width: 520px;
     border-radius: 10px 10px 12px 12px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
+}
+#error-popup{
+    position: fixed;
+    top: -10%;
+    left: 50%;
+    width: 80%;
+    max-width: 520px;
+    height: 50px;
+    padding: 5px 15px;
+    transform: translateX(-50%);
+    transition: 0.3s;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    background-color: var(--dark);
+}
+#error-popup.active{
+    top: 5%
+}
+#error-popup p{
+    position: relative;
+    top: 50%;
+    width: 92%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: justify;
+    font-size: 1em;
+}
+#error-popup span{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 2%;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+#error-popup span:hover{
+    color: var(--main);
 }
 #quiz{
     display: none;
+}
+#bttn-float{
+    position: fixed;
+    top: 4%;
+    left: 4%;
+    margin: 0;
+    width: 80px;
+    padding: 5px 10px;
+    text-align: right;
+    background-color: var(--dark);
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    clip-path: polygon(100% 0%, 100% 100%, 20% 100%, 0% 50%, 20% 0%);
+}
+#bttn-float:hover {
+    transform: translateY(-2px);
 }
 #caption {
     width: 80%;
     background-color: var(--main);
     margin: 20px auto;
-    padding: 8px 0;
+    padding: 8px 4px;
     border-radius: 4px;
 }
   
@@ -63,18 +121,29 @@ section {
     width: 100%;
 }
 #triesTxt p{
+    width: 100%;
+    word-break: break-all;
+    word-wrap: break-word;
     text-align: center;
-    color: var(--main);
+    color: var(--red);
     font-family: 'Font Awesome 5 Free';
     font-weight: 800;
     letter-spacing: 0.3em;
     font-size: 1.5em;
 }
+.tries-left{
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.tries-right{
+    word-break: break-all;
+    word-wrap: break-word;
+    opacity: .4;
+}
 .display p {
     width: fit-content;
     text-align: center;
-    font-size: 5em;
-    margin: 40px auto;
+    margin: 40px auto 20px;
 }
   
 #answer{
@@ -132,20 +201,16 @@ section {
 
 }
 .progressInside{
-
     transition: 0.3s;
     text-align: center;
     width: 0;
     height: 100%;
     background-color: black;
 }
-.list{
-    margin: auto;
-}
 #lists{
     display: flex;
     flex-wrap: wrap;
-    align-content: stretch;
+    justify-content: space-around;
 }
 @media all and (max-width: 500px) {
     #lists{
@@ -188,6 +253,10 @@ section {
     margin-top: 10px;
 }
 #interface li{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    position: relative;
     transition: 0.2s;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     min-width: 200px;
@@ -202,8 +271,11 @@ section {
     color: white;
 }
 input[type="checkbox"]{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     cursor: pointer;
-    transform: translateY(-25%);
     transition: 0.3s;
     background-color: white;
     border: 2px solid var(--dark);
@@ -217,12 +289,6 @@ input[type="checkbox"]:checked{
     background-color: var(--dark);
 }
 input[type="checkbox"]::before{
-    position: relative;
-    top: 20%;
-    display: block;
-    margin: auto;
-    width: fit-content;
-    height: fit-content;
     transform: scale(0);
     content: "\f00c";
     font-family: 'Font Awesome 5 Free';
@@ -253,7 +319,7 @@ input[type="checkbox"]:checked::before {
     display: flex;
     justify-content: center;
 }
-input[type="button"]{
+.bttn-normal{
     appearance: none;
     background-color: var(--main);
     border-radius: 10px;
@@ -269,7 +335,7 @@ input[type="button"]{
     margin: 0 10px;
   }
   
-input[type="button"]:hover {
+.bttn-normal:hover {
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
 }
@@ -298,8 +364,30 @@ input[type="number"]{
     display: block;
 
 }
-#after{
+#lw-screen{
     display: none;
+}
+#lw-screen h1{
+    text-align: center;
+    margin: 70px 0;
+    font-size: 3em;
+}
+#lw-bttns{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+#lw-txt{
+    display: flex;
+    justify-content: space-around;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: 0 0 50px;
+}
+#lw-txt > *{
+    text-align: center;
+    flex-basis: 100%;
 }
 footer {
     color: white;
