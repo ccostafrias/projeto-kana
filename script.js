@@ -100,6 +100,7 @@ function start(){
             caption.children[0].innerHTML = "Insira em <em>romanji</em> o que está escrito em <em>nihongo</em>"
             caption.style.backgroundColor = "var(--main)"
             inputAns.style.width = displayFontSize*elements*(105/100) + "px"
+            section[0].classList.add('active')
             while (inputAns.hasChildNodes()) {
                 inputAns.removeChild(inputAns.firstChild);
             }
@@ -171,6 +172,7 @@ function back(){
     interface.style.display = "block"
     lwScreen.style.display = "none"
     quiz.style.display = "none"
+    section[0].classList.remove('active')
 }
 function fadeout(element, lw, txtColor){
     quiz.style.pointerEvents = "none"

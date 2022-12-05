@@ -9,6 +9,22 @@
     color: white;
     opacity: .5;
 }
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark); 
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light); 
+    opacity: .5;
+}
 * {
     margin: 0;
     padding: 0;
@@ -21,21 +37,23 @@ body {
     width: 100%;
     height: 100%;
     background-color: var(--main);
+    overflow: hidden;
 }
 header {
+    display: block;
     color: white;
     text-align: center;
-    margin: 30px 0 40px;
+    margin: 20px 0;
 }
 header h1 {
-    font-size: 2em;
+    font-size: 5vh;
 }
 header h2 {
-    font-size: 1.2em;
+    font-size: 3vh;
 }
 section {
     padding: 20px;
-    margin: auto;
+    margin: 0 auto 15px;
     background-color: white;
     max-width: 520px;
     border-radius: 10px 10px 12px 12px;
@@ -43,7 +61,7 @@ section {
 }
 #error-popup{
     position: fixed;
-    top: -10%;
+    top: -50%;
     left: 50%;
     width: 80%;
     max-width: 520px;
@@ -54,6 +72,7 @@ section {
     border-radius: 10px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
     background-color: var(--dark);
+    z-index: 2;
 }
 #error-popup.active{
     top: 5%
@@ -84,8 +103,8 @@ section {
 }
 #bttn-float{
     position: fixed;
-    top: 4%;
-    left: 4%;
+    top: 10px;
+    left: 10px;
     margin: 0;
     width: 80px;
     padding: 5px 10px;
@@ -97,8 +116,9 @@ section {
     appearance: none;
     border: none;
     cursor: pointer;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-    clip-path: polygon(100% 0%, 100% 100%, 20% 100%, 0% 50%, 20% 0%);
+    transition: .3s;
+    clip-path: polygon(100% 0%, 100% 100%, 15px 100%, 0% 50%, 15px 0%);
+    z-index: 2;
 }
 #bttn-float:hover {
     transform: translateY(-2px);
@@ -148,7 +168,7 @@ section {
   
 #answer{
     width: calc(80% - 100px);
-    margin: 0 auto;
+    margin: 0 auto 40px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -166,7 +186,7 @@ section {
     background-color: var(--dark);
     height: 80px;
     width: calc(100% + 40px);
-    margin: 40px 60px -20px -20px;
+    margin: 0px 60px -20px -20px;
     border-radius: 0 0 10px 10px;
 }
 .progressBack{
@@ -211,16 +231,6 @@ section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-}
-@media all and (max-width: 500px) {
-    #lists{
-        margin: auto;
-        display: block;
-        max-width: 90%;
-    }
-    .list{
-        margin-bottom: 30px;
-    }
 }
 .links{
     text-align: center;
@@ -390,8 +400,59 @@ input[type="number"]{
     flex-basis: 100%;
 }
 footer {
+    display: none;
     color: white;
     font-style: italic;
     text-align: center;
-    margin: 20px;
-}  
+    margin: 10px 0;
+}
+@media all and (max-width: 500px){
+    body{
+        overflow: auto;
+    }
+    #lists{
+        margin: auto;
+        display: block;
+        max-width: 90%;
+    }
+    .list{
+        margin-bottom: 30px;
+    }
+    header{
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 101%;
+        padding: 20px 0;
+        height: fit-content;
+        background-color: var(--main);
+        color: white;
+        text-align: center;
+        margin: 0px auto;
+        z-index: 1;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    }
+    section{
+        border-radius: 0;
+        margin: 108px auto 0;
+    }
+    section.active{
+        border-radius: 0;
+        margin: 0 auto;
+        height: 100vh;
+        padding-top: 150px;
+        overflow: hidden;
+    }
+    #progress{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+    #inputs{
+        border-radius: 0;
+    }
+}
