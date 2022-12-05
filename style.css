@@ -37,7 +37,6 @@ body {
     width: 100%;
     height: 100%;
     background-color: var(--main);
-    overflow: hidden;
 }
 header {
     display: block;
@@ -46,10 +45,10 @@ header {
     margin: 20px 0;
 }
 header h1 {
-    font-size: 5vh;
+    font-size: 2em;
 }
 header h2 {
-    font-size: 3vh;
+    font-size: 1em;
 }
 section {
     padding: 20px;
@@ -163,7 +162,7 @@ section {
 .display p {
     width: fit-content;
     text-align: center;
-    margin: 40px auto 20px;
+    margin: 20px auto;
 }
   
 #answer{
@@ -441,7 +440,7 @@ footer {
         border-radius: 0;
         margin: 0 auto;
         height: 100vh;
-        padding-top: 150px;
+        padding-top: 120px;
         overflow: hidden;
     }
     #progress{
@@ -454,5 +453,13 @@ footer {
     }
     #inputs{
         border-radius: 0;
+    }
+}
+@media all and (max-height: 540px) and (max-width: 500px){
+    section.active{
+        padding-top: 10px;
+    }
+    header.active{
+        display: none;
     }
 }

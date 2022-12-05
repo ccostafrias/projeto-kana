@@ -1,6 +1,7 @@
 const quiz = document.getElementById("quiz")
 const interface = document.getElementById("interface")
 const section = document.getElementsByTagName("section")
+const header = document.getElementsByTagName("header")
 const listH = document.getElementsByClassName('hcheckbox')
 const listK = document.getElementsByClassName('kcheckbox')
 const inputAns = document.getElementById("answer")
@@ -92,15 +93,16 @@ function start(){
             score = 0
             misses = 0
             setmisses()
-            if (elements >= 5){
+            if (elements >= 4){
                 displayFontSize = section[0].offsetWidth * 8/10 / elements
             }else{
                 displayFontSize = 96
             }
-            caption.children[0].innerHTML = "Insira em <em>romanji</em> o que está escrito em <em>nihongo</em>"
+            caption.children[0].innerHTML = "Insira o respectivo <em>romanji</em>"
             caption.style.backgroundColor = "var(--main)"
             inputAns.style.width = displayFontSize*elements*(105/100) + "px"
             section[0].classList.add('active')
+            header[0].classList.add('active')
             while (inputAns.hasChildNodes()) {
                 inputAns.removeChild(inputAns.firstChild);
             }
@@ -173,6 +175,7 @@ function back(){
     lwScreen.style.display = "none"
     quiz.style.display = "none"
     section[0].classList.remove('active')
+    header[0].classList.remove('active')
 }
 function fadeout(element, lw, txtColor){
     quiz.style.pointerEvents = "none"
