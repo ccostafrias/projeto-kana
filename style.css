@@ -463,3 +463,8 @@ footer {
         display: none;
     }
 }
+@media all and (max-height: 420px) and (max-width: 500px){
+    #progress{
+        display: none;
+    }
+}
