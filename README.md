@@ -10,5 +10,3 @@
 - Já na tela de jogo, digite em *romanji* o que aparecer em *nihongo* no espaço adequado.
 
 ![](https://i.ibb.co/h8Km5Px/kana-quiz-desktop.png)
-
-[Executar o site do projeto Kana](https://ccostafrias.github.io/projeto-kana/)
